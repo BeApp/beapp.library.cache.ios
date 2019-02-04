@@ -1,6 +1,6 @@
 //
 //  CacheThenAsyncStrategy.swift
-//  lejournal
+//  BeappCache
 //
 //  Created by Anthony Dudouit on 03/09/2018.
 //  Copyright © 2018 Cedric G. All rights reserved.

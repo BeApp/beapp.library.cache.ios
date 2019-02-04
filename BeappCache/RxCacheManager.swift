@@ -1,6 +1,6 @@
 //
 //  VMCacheManager.swift
-//  lejournal
+//  BeappCache
 //
 //  Created by Anthony Dudouit on 01/08/2018.
 //  Copyright © 2018 Cedric G. All rights reserved.
