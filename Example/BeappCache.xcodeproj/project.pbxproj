@@ -28,7 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		310AA6187CEDE1205759C16F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		310AA6187CEDE1205759C16F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		5B41E82E61C41A5A7FA79BF1 /* Pods-BeappCache_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeappCache_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeappCache_Tests/Pods-BeappCache_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* BeappCache_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeappCache_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,10 +42,10 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7C24A7850F9F2DEDE701B1EB /* Pods-BeappCache_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeappCache_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeappCache_Example/Pods-BeappCache_Example.release.xcconfig"; sourceTree = "<group>"; };
 		83C167F4D2B16A64A0B446D9 /* Pods_BeappCache_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeappCache_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		90C51CC3F69FE7C4D0938E41 /* BeappCache.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = BeappCache.podspec; path = ../BeappCache.podspec; sourceTree = "<group>"; };
+		90C51CC3F69FE7C4D0938E41 /* BeappCache.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BeappCache.podspec; path = ../BeappCache.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9B843FF333183824CA63B0E7 /* Pods_BeappCache_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeappCache_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1BF2510CB15D7AE6448C2F3 /* Pods-BeappCache_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeappCache_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeappCache_Tests/Pods-BeappCache_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		C2A6A1B79A8CCEBB28919390 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		C2A6A1B79A8CCEBB28919390 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		DB5EE4DA82140C5C77A7848C /* Pods-BeappCache_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeappCache_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeappCache_Example/Pods-BeappCache_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
