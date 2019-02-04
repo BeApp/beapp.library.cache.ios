@@ -13,7 +13,7 @@ protocol CacheStrategyProtocol {
 	func getStrategyObservable<T>(cacheObservable: Maybe<CacheWrapper<T>>, asyncObservable: Single<CacheWrapper<T>>) -> Observable<CacheWrapper<T>> where T: Codable
 }
 
-enum CacheStrategy {
+public enum CacheStrategy {
 	case cacheThenAsync
 	case asyncOrCache
 	case cacheOrAsync

@@ -28,9 +28,10 @@ This class is the entry point of the Cache management
 
 - References: [RxCache Beapp Android]
 */
-class RxCacheManager {
+
+open class RxCacheManager {
 	
-	static let shared = RxCacheManager()
+	public static let shared = RxCacheManager()
 	
 	var storage: Storage<DummyCodable>?
 	
@@ -95,13 +96,13 @@ class RxCacheManager {
 	- parameter key:  The key pattern to retrieve data
 	- returns: A builder to prepare cache resolution
 	*/
-	func fromKey<T: Codable>(key: String) -> StrategyBuilder<T> {
+	public func fromKey<T: Codable>(key: String) -> StrategyBuilder<T> {
 		return StrategyBuilder<T>(key: key, cacheManager: self)
 	}
 
 }
 
-class StrategyBuilder<T: Codable> {
+open class StrategyBuilder<T: Codable> {
     private let key: String
     private let cacheManager: RxCacheManager
     private var cacheStrategy: CacheStrategy
@@ -119,7 +120,7 @@ class StrategyBuilder<T: Codable> {
      Apply the strategy to use
      - parameter strategy: The strategy pattern to use
      */
-    func withStrategy(_ strategy: CacheStrategy) -> StrategyBuilder<T> {
+    public func withStrategy(_ strategy: CacheStrategy) -> StrategyBuilder<T> {
         self.cacheStrategy = strategy
         return self
     }
@@ -128,7 +129,7 @@ class StrategyBuilder<T: Codable> {
      The Single to use for async operations.
      - parameter async: Single
      */
-    func withAsync(_ async: Single<T>) -> StrategyBuilder<T> {
+    public func withAsync(_ async: Single<T>) -> StrategyBuilder<T> {
         self.asyncObservable = async
         return self
     }
@@ -136,7 +137,7 @@ class StrategyBuilder<T: Codable> {
      Convert this resolution data strategy to a Rx Observable
      - returns: an Observable
      */
-    func fetch() -> Observable<T> {
+    public func fetch() -> Observable<T> {
         return self.fetchWrapper()
             .map { cacheWrapper in cacheWrapper.data }
     }
@@ -145,7 +146,7 @@ class StrategyBuilder<T: Codable> {
      Convert this resolution data strategy to a Rx Observable
      - returns: an Observable
      */
-    func fetchWrapper() -> Observable<CacheWrapper<T>> {
+    public func fetchWrapper() -> Observable<CacheWrapper<T>> {
         
         let asyncObservableCaching = cacheManager.buildAsyncObservableCaching(asyncObservable: self.asyncObservable, key: self.key)
         let cacheObservable = cacheManager.buildCacheObservable(key: self.key, of: T.self)

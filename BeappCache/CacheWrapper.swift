@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CacheWrapper<T>: Codable where T: Codable {
+public struct CacheWrapper<T>: Codable where T: Codable {
 	let date: Date
 	let data: T
 }
