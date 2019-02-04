@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'BeappCache_Example' do
+  pod 'BeappCache', :path => '../'
+
+  target 'BeappCache_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
