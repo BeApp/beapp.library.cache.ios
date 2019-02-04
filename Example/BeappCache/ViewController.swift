@@ -7,18 +7,35 @@
 //
 
 import UIKit
+import BeappCache
+import RxSwift
 
 class ViewController: UIViewController {
-
+    
+    let bag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        saveDataToCache()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func saveDataToCache() {
+        let singleEmail = Single.just("Test BeappCache")
+        
+        let observer = RxCacheManager.shared.fromKey(key: "test_beappCache")
+            .withAsync(singleEmail)
+            .withStrategy(.justAsync)
+            .fetch()
+        
+        observer
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { (email) in
+                print(email)
+            }, onError: { (error) in
+                print(error)
+            })
+            .disposed(by: bag)
     }
-
 }
 
