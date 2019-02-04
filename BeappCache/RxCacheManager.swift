@@ -33,41 +33,21 @@ open class RxCacheManager {
 	
 	public static let shared = RxCacheManager()
 	
-	var storage: Storage<DummyCodable>?
+	var externalStorageType: ExternalStorageEnum = .Cache
 	
-	private init() {
-		let diskConfig = DiskConfig(name: "Floppy")
-		let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)
-		do {
-			storage = try Storage(
-				diskConfig: diskConfig,
-				memoryConfig: memoryConfig,
-				transformer: TransformerFactory.forCodable(ofType: DummyCodable.self)
-			)
-			
-		} catch {
-			print(error)
-		}
-	}
+    private init() { }
 	
 	fileprivate func buildCacheObservable<T>(key: String, of type: T.Type) -> Maybe<CacheWrapper<T>> where T: Codable {
 		return Maybe<CacheWrapper<T>>.create { maybe in
-			guard let _storage = self.storage else {
-				print("[CACHE] no storage error")
-				maybe(.completed)
-				return Disposables.create()
-			}
-			do {
-				let cacheWrapper = try _storage.transformCodable(ofType: CacheWrapper<T>.self).object(forKey: key)
-				print("[CACHE] cacheWrapper for \(key) retrieved from cache")
-				maybe(.success(cacheWrapper))
-			} catch {
-				print("[CACHE] cacheWrapper for \(key) not retrieved with error \(error)")
-				maybe(.completed)
-			}
-			return Disposables.create()
+            if let cacheWrapper = self.externalStorageType.storage.getCacheWrapper(key: key, of: T.self) {
+                maybe(.success(cacheWrapper))
+            } else {
+                print("[CACHE] cacheWrapper for \(key) not retrieved")
+                maybe(.completed)
+            }
+            return Disposables.create()
 		}
-			.subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+        .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
 	}
 	
 	fileprivate func buildAsyncObservableCaching<T>(asyncObservable: Single<T>, key: String) -> Single<CacheWrapper<T>> where T: Codable {
@@ -83,10 +63,8 @@ open class RxCacheManager {
 		print("[CACHE] saving \(key)")
 
 		let cacheData = CacheWrapper<T>(date: Date(), data: data)
-		do {
-			try storage?.transformCodable(ofType: CacheWrapper.self).setObject(cacheData, forKey: key)
-		} catch {
-			print("[CACHE] error saving cache with \(key) \(error)")
+        if !externalStorageType.storage.setCacheData(data: cacheData, for: key) {
+			print("[CACHE] error saving cache with \(key)")
 		}
 	}
 	

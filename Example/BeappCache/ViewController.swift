@@ -21,11 +21,11 @@ class ViewController: UIViewController {
     }
     
     func saveDataToCache() {
-        let singleEmail = Single.just("Test BeappCache")
+        let singleEmail = Single.just("Test BeappCache2")
         
         let observer = RxCacheManager.shared.fromKey(key: "test_beappCache")
             .withAsync(singleEmail)
-            .withStrategy(.justAsync)
+            .withStrategy(.asyncOrCache)
             .fetch()
         
         observer
