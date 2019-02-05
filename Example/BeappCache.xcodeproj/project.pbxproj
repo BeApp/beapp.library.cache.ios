@@ -14,7 +14,6 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		948A13FD220984D200740F03 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948A13FC220984D200740F03 /* CacheManager.swift */; };
 		CB9A86AC023BC65B977F1F1C /* Pods_BeappCache_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C167F4D2B16A64A0B446D9 /* Pods_BeappCache_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +43,6 @@
 		7C24A7850F9F2DEDE701B1EB /* Pods-BeappCache_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeappCache_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeappCache_Example/Pods-BeappCache_Example.release.xcconfig"; sourceTree = "<group>"; };
 		83C167F4D2B16A64A0B446D9 /* Pods_BeappCache_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeappCache_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90C51CC3F69FE7C4D0938E41 /* BeappCache.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BeappCache.podspec; path = ../BeappCache.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		948A13FC220984D200740F03 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		9B843FF333183824CA63B0E7 /* Pods_BeappCache_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeappCache_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1BF2510CB15D7AE6448C2F3 /* Pods-BeappCache_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeappCache_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeappCache_Tests/Pods-BeappCache_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		C2A6A1B79A8CCEBB28919390 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -97,9 +95,6 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				948A13F62209834200740F03 /* UI */,
-				948A13F82209834F00740F03 /* Logic */,
-				948A13F72209834900740F03 /* Core */,
-				948A13FA2209837300740F03 /* Extension */,
 				948A13F92209836900740F03 /* Ressources */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
@@ -162,21 +157,6 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
-		948A13F72209834900740F03 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Core;
-			sourceTree = "<group>";
-		};
-		948A13F82209834F00740F03 /* Logic */ = {
-			isa = PBXGroup;
-			children = (
-				948A13FC220984D200740F03 /* CacheManager.swift */,
-			);
-			name = Logic;
-			sourceTree = "<group>";
-		};
 		948A13F92209836900740F03 /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,13 +164,6 @@
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 			);
 			name = Ressources;
-			sourceTree = "<group>";
-		};
-		948A13FA2209837300740F03 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Extension;
 			sourceTree = "<group>";
 		};
 		EF7D40C5D93BB090BFF08DF2 /* Frameworks */ = {
@@ -382,7 +355,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
-				948A13FD220984D200740F03 /* CacheManager.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -472,11 +444,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -520,10 +493,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -534,6 +508,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BeappCache/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -548,6 +523,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BeappCache/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
