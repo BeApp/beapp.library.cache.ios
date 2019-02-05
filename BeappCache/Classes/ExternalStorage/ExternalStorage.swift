@@ -22,6 +22,12 @@ public enum ExternalStorageEnum {
     case CoreData
     
     var storage: ExternalStorageProtocol {
-        return CacheStorage()
+        switch self {
+        case .Cache:
+            return CacheStorage()
+
+        case .CoreData:
+            return CoreDataStorage()
+        }
     }
 }
