@@ -9,8 +9,12 @@ import Foundation
 import RxSwift
 
 protocol ExternalStorageProtocol {
-    func getCacheWrapper<T>(key: String, of type: T.Type) -> CacheWrapper<T>? where T: Codable
-    func setCacheData<T>(data: CacheWrapper<T>, for key: String) -> Bool where T: Codable
+    func count() -> Int
+    func exist(forKey key: String) -> Bool
+    func get<T>(forKey key: String, of type: T.Type) -> CacheWrapper<T>? where T: Codable
+    func put<T>(data: CacheWrapper<T>, forKey key: String) -> Bool where T: Codable
+    func delete(forKey key: String) -> Bool
+    func clear()
 }
 
 public enum ExternalStorageEnum {

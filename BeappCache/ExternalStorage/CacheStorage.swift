@@ -27,7 +27,20 @@ class CacheStorage: ExternalStorageProtocol {
         }
     }
     
-    func getCacheWrapper<T>(key: String, of type: T.Type) -> CacheWrapper<T>? where T : Decodable, T : Encodable {
+    func count() -> Int {
+        return 0
+    }
+    
+    func exist(forKey key: String) -> Bool {
+        do {
+            return try storage?.existsObject(forKey: key) ?? false
+        } catch {
+            print("[ERROR] cannot know if key \(key) exist with \(error)")
+            return false
+        }
+    }
+    
+    func get<T>(forKey key: String, of type: T.Type) -> CacheWrapper<T>? where T : Decodable, T : Encodable {
         guard let _storage = storage else {
             return nil
         }
@@ -40,12 +53,30 @@ class CacheStorage: ExternalStorageProtocol {
         }
     }
     
-    func setCacheData<T>(data: CacheWrapper<T>, for key: String) -> Bool where T : Decodable, T : Encodable {
+    func put<T>(data: CacheWrapper<T>, forKey key: String) -> Bool where T : Decodable, T : Encodable {
         do {
             try storage?.transformCodable(ofType: CacheWrapper.self).setObject(data, forKey: key)
             return true
         } catch {
             return false
+        }
+    }
+    
+    func delete(forKey key: String) -> Bool {
+        do {
+            try storage?.removeObject(forKey: key)
+            return true
+        } catch {
+            print("[ERROR] cannot delete cache for key \(key) with \(error)")
+            return false
+        }
+    }
+    
+    func clear() {
+        do {
+            try storage?.removeAll()
+        } catch {
+            print("[ERROR] cannot clear cache with \(error)")
         }
     }
 }

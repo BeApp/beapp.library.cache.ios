@@ -12,15 +12,6 @@ import RxSwift
 
 public struct DummyCodable: Codable { }
 
-// MARK: - Protocol
-protocol RxCacheManagerDependant {}
-
-extension RxCacheManagerDependant {
-	var cacheManager: RxCacheManager {
-		return RxCacheManager.shared
-	}
-}
-
 /**
 [RxCache Beapp Android]: (https://bitbucket.org/beappers/beapp.cache.andro)
 
@@ -31,15 +22,18 @@ This class is the entry point of the Cache management
 
 open class RxCacheManager {
 	
-	public static let shared = RxCacheManager()
+    public static let cacheShared = RxCacheManager(storageType: .Cache)
+    public static let coreDataShared = RxCacheManager(storageType: .CoreData)
+
+	var externalStorageType: ExternalStorageEnum
 	
-	var externalStorageType: ExternalStorageEnum = .Cache
-	
-    private init() { }
+    private init(storageType: ExternalStorageEnum) {
+        externalStorageType = storageType
+    }
 	
 	fileprivate func buildCacheObservable<T>(key: String, of type: T.Type) -> Maybe<CacheWrapper<T>> where T: Codable {
 		return Maybe<CacheWrapper<T>>.create { maybe in
-            if let cacheWrapper = self.externalStorageType.storage.getCacheWrapper(key: key, of: T.self) {
+            if let cacheWrapper = self.externalStorageType.storage.get(forKey: key, of: T.self) {
                 maybe(.success(cacheWrapper))
             } else {
                 print("[CACHE] cacheWrapper for \(key) not retrieved")
@@ -56,14 +50,13 @@ open class RxCacheManager {
 				self.setCache(decodable, with: key)
 			})
 			.map { CacheWrapper<T>(date: Date(), data: $0) }
-		
 	}
 	
 	fileprivate func setCache<T>(_ data: T, with key: String) where T: Codable {
 		print("[CACHE] saving \(key)")
 
 		let cacheData = CacheWrapper<T>(date: Date(), data: data)
-        if !externalStorageType.storage.setCacheData(data: cacheData, for: key) {
+        if !externalStorageType.storage.put(data: cacheData, forKey: key) {
 			print("[CACHE] error saving cache with \(key)")
 		}
 	}
@@ -111,6 +104,7 @@ open class StrategyBuilder<T: Codable> {
         self.asyncObservable = async
         return self
     }
+    
     /**
      Convert this resolution data strategy to a Rx Observable
      - returns: an Observable
@@ -124,7 +118,7 @@ open class StrategyBuilder<T: Codable> {
      Convert this resolution data strategy to a Rx Observable
      - returns: an Observable
      */
-    public func fetchWrapper() -> Observable<CacheWrapper<T>> {
+    fileprivate func fetchWrapper() -> Observable<CacheWrapper<T>> {
         
         let asyncObservableCaching = cacheManager.buildAsyncObservableCaching(asyncObservable: self.asyncObservable, key: self.key)
         let cacheObservable = cacheManager.buildCacheObservable(key: self.key, of: T.self)
