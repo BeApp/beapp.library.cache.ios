@@ -34,5 +34,5 @@ TODO: Add long description of the pod here.
   s.frameworks = 'Foundation'
   
   s.dependency 'Cache', '~> 5.2.0'
-  s.dependency 'RxSwift', '~> 4.3.0'
+  s.dependency 'RxSwift', '~> 4.4.0'
 end
