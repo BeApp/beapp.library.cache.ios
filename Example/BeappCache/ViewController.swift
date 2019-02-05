@@ -21,14 +21,7 @@ class ViewController: UIViewController {
     }
     
     func saveDataToCache() {
-        let singleEmail = Single.just("Test BeappCache2")
-        
-        let observer = RxCacheManager.shared.fromKey(key: "test_beappCache")
-            .withAsync(singleEmail)
-            .withStrategy(.asyncOrCache)
-            .fetch()
-        
-        observer
+        CacheManager.shared.saveData(text: "Test to save data with cache library")
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (email) in
                 print(email)
