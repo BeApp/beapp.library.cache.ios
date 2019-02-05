@@ -21,19 +21,16 @@ This class is the entry point of the Cache management
 */
 
 open class RxCacheManager {
-	
-    public static let cacheShared = RxCacheManager(storageType: .Cache)
-    public static let coreDataShared = RxCacheManager(storageType: .CoreData)
-
 	var externalStorageType: ExternalStorageEnum
 	
-    private init(storageType: ExternalStorageEnum) {
+    public init(storageType: ExternalStorageEnum) {
         externalStorageType = storageType
     }
 	
 	fileprivate func buildCacheObservable<T>(key: String, of type: T.Type) -> Maybe<CacheWrapper<T>> where T: Codable {
 		return Maybe<CacheWrapper<T>>.create { maybe in
             if let cacheWrapper = self.externalStorageType.storage.get(forKey: key, of: T.self) {
+                print("[CACHE] cacheWrapper for \(key) retrieved from cache")
                 maybe(.success(cacheWrapper))
             } else {
                 print("[CACHE] cacheWrapper for \(key) not retrieved")

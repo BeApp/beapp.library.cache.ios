@@ -19,15 +19,11 @@ protocol ExternalStorageProtocol {
 
 public enum ExternalStorageEnum {
     case Cache
-    case CoreData
     
     var storage: ExternalStorageProtocol {
         switch self {
         case .Cache:
             return CacheStorage()
-
-        case .CoreData:
-            return CoreDataStorage()
         }
     }
 }
