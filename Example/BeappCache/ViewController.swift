@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     
     // MARK: - Variables
     let bag = DisposeBag()
-    let cacheManager = RxCacheManager(storageType: .Cache)
+    let rxCacheManager = RxCacheManager(storageType: .Cache)
     let singleString = Single.just("Test to save data with Cache library")
     
     // MARK: - Life cycle
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     
     /// Call async request or get data from cache if present
     func asyncRequestOrCache() {
-        cacheManager.fromKey(key: "key_xxx")
+        rxCacheManager.fromKey(key: "key_xxx")
             .withAsync(singleString)
             .withStrategy(.asyncOrCache)
             .fetch()
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
     
     /// Call only async request
     func justAsyncRequest() {
-        cacheManager.fromKey(key: "key_xxx")
+        rxCacheManager.fromKey(key: "key_xxx")
             .withAsync(singleString)
             .withStrategy(.justAsync)
             .fetch()
@@ -60,7 +60,7 @@ class ViewController: UIViewController {
     
     /// Onlye get data from cache if present
     func getDataFromCache() {
-        cacheManager.fromKey(key: "key_xxx")
+        rxCacheManager.fromKey(key: "key_xxx")
             .withAsync(singleString)
             .withStrategy(.justCache)
             .fetch()
