@@ -33,20 +33,24 @@ rxCacheManager.fromKey(key: "key_xxx")
 
 ### Verbose
 * `RxCacheManager(verbose: true)`
+
 1. Enable verbose log of RxCacheManager
 
 ### Default configuration
 * `RxCacheManager()`
+
 1. Use  the Cache librairy
 2. Cache configuration is by default `DiskConfig(name: "Floppy")` and `MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)`
 
 ### Cache with configuration
 * `RxCacheManager(storageType: .cache(config: cacheConfig))`
+
 1. Use the cache librairy
 2. Define your cache configuration like next  `let cacheConfig = CacheStorageConfig(diskConfig: DiskConfig(name: "your_name"), memoryConfig: MemoryConfig(expiry: expiry, countLimit: Uint, totalCostLimit: Uint))`
 
 ### Custom storage protocol
-* `RxCacheManager(storageType: .custom(storage: YourExternalStorageProtocol()))` 
+* `RxCacheManager(storageType: .custom(storage: YourExternalStorageProtocol()))`
+
 1. Define your own `ExternalStorageProtocol`
 
 ## Result
