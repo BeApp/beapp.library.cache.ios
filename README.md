@@ -22,18 +22,40 @@ pod 'BeappCache'
 5. Fetch the result (Return an Observable)
 
 ```
-let rxCacheManager = RxCacheManager(storageType: .Cache)
+let rxCacheManager = RxCacheManager()
 rxCacheManager.fromKey(key: "key_xxx")
 .withAsync(singleString)
 .withStrategy(.justAsync)
 .fetch()
 ```
 
+## RxCacheManager configuration
+
+### Default configuration
+* `RxCacheManager()`: 
+1. Use  the Cache librairy
+2. Cache configuration is by default `DiskConfig(name: "Floppy")` and `MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)`
+
+### Cache with configuration
+* `RxCacheManager(storageType: .cache(config: cacheConfig))`
+1. Use the cache librairy
+2. Define your cache configuration like next  `let cacheConfig = CacheStorageConfig(diskConfig: DiskConfig(name: "your_name"), memoryConfig: MemoryConfig(expiry: expiry, countLimit: Uint, totalCostLimit: Uint))`
+
+### Custom storage protocol
+* `RxCacheManager(storageType: .custom(storage: YourExternalStorageProtocol()))` 
+1. Define your own `ExternalStorageProtocol`
+
 ## Result
 
 ```
-[CACHE] saving key_xxx
-[CACHE] cacheWrapper for key_xxx retrieved from cache
+[BeappCache] [Cache] CacheWrapper with the key key_xxx saved
+Success async request or data from cache
+
+[BeappCache] [Cache] CacheWrapper with the key key_xxx saved
+Success async request
+
+[BeappCache] [Cache] CacheWrapper for key_xxx retrieved from cache
+Success to get data from cache
 ```
 
 ## Author
