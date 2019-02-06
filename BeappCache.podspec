@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'BeappCache'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of BeappCache.'
+  s.summary          = 'This library provides a cache mechanism relying on RxSwift'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,20 +18,18 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  This library provides a cache mechanism relying on RxSwift. There are currently one storage implementation: Cache
+  DESC
 
-  s.homepage         = 'https://github.com/aricheux/BeappCache'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.homepage         = 'https://bitbucket.org/beappers/beapp.cache.ios'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'beapp' => 'dev@beapp.fr' }
-  s.source           = { :git => 'https://github.com/aricheux/BeappCache.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://aricheux@bitbucket.org/beappers/beapp.cache.ios.git', :tag => s.version.to_s }
   
   s.ios.deployment_target = '11.0'
-
+  s.swift_version = '4.2'
   s.source_files  = 'BeappCache/Classes/**/*'
   s.frameworks = 'Foundation'
-  
   s.dependency 'Cache', '~> 5.2.0'
   s.dependency 'RxSwift', '~> 4.4.0'
 end
