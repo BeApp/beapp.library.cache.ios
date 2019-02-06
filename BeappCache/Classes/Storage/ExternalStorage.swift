@@ -20,4 +20,13 @@ public enum ExternalStorageEnum {
         case .custom(let storage): return storage
         }
     }
+    
+    var type: String {
+        switch self {
+        case .defaultCache, .cache:
+            return "Cache"
+        case .custom:
+            return "Custom"
+        }
+    }
 }

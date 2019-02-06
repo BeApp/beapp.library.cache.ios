@@ -42,16 +42,11 @@ extension CacheStorage: ExternalStorageProtocol {
         return 0
     }
     
-    func exist(forKey key: String) -> Bool {
-        do {
-            return try storage?.existsObject(forKey: key) ?? false
-        } catch {
-            print("[ERROR] cannot know if key \(key) exist with \(error)")
-            return false
-        }
+    func exist(forKey key: String) throws -> Bool {
+        return try storage?.existsObject(forKey: key) ?? false
     }
     
-    func get<T>(forKey key: String, of type: T.Type) -> CacheWrapper<T>? where T : Decodable, T : Encodable {
+    func get<T>(forKey key: String, of type: T.Type) throws -> CacheWrapper<T>? where T : Decodable, T : Encodable {
         guard let _storage = storage else {
             return nil
         }
@@ -59,21 +54,16 @@ extension CacheStorage: ExternalStorageProtocol {
         do {
             return try _storage.transformCodable(ofType: CacheWrapper<T>.self).object(forKey: key)
         } catch {
-            print("[ERROR] cannot get storage from Cache")
+            print("[BeappCache][ERROR] cannot get storage from Cache")
             return nil
         }
     }
     
-    func put<T>(data: CacheWrapper<T>, forKey key: String) -> Bool where T : Decodable, T : Encodable {
-        do {
-            try storage?.transformCodable(ofType: CacheWrapper.self).setObject(data, forKey: key)
-            return true
-        } catch {
-            return false
-        }
+    func put<T>(data: CacheWrapper<T>, forKey key: String) throws where T : Decodable, T : Encodable {
+        try storage?.transformCodable(ofType: CacheWrapper.self).setObject(data, forKey: key)
     }
     
-    func delete(forKey key: String) {
+    func delete(forKey key: String) throws {
         do {
             try storage?.removeObject(forKey: key)
         } catch {
@@ -81,7 +71,7 @@ extension CacheStorage: ExternalStorageProtocol {
         }
     }
     
-    func clear() {
+    func clear() throws {
         do {
             try storage?.removeAll()
         } catch {

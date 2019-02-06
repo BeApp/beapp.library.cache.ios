@@ -17,26 +17,31 @@ public struct DummyCodable: Codable { }
 This class is the entry point of the Cache management
 
 - References: [RxCache Beapp Android]
-*/
+*/  
 
 open class RxCacheManager {
 	var externalStorageType: ExternalStorageEnum
+    var log: Log!
 	
-    public init(storageType: ExternalStorageEnum = .defaultCache) {
+    public init(storageType: ExternalStorageEnum = .defaultCache, verbose: Bool = false) {
         externalStorageType = storageType
+        log = Log(verbose: verbose)
     }
 	
     // MARK: -
     
     func buildCacheObservable<T>(key: String, of type: T.Type) -> Maybe<CacheWrapper<T>> where T: Codable {
 		return Maybe<CacheWrapper<T>>.create { maybe in
-            if let cacheWrapper = self.externalStorageType.storage.get(forKey: key, of: T.self) {
-                print("[CACHE] cacheWrapper for \(key) retrieved from cache")
-                maybe(.success(cacheWrapper))
-            } else {
-                print("[CACHE] cacheWrapper for \(key) not retrieved")
+            do {
+                if let cacheWrapper = try self.externalStorageType.storage.get(forKey: key, of: T.self) {
+                    self.log.printLog(type: self.externalStorageType.type, message: "CacheWrapper for \(key) retrieved from cache")
+                    maybe(.success(cacheWrapper))
+                }
+             } catch {
+                self.log.printLog(type: self.externalStorageType.type, message: "[ERROR] CacheWrapper for \(key) not retrieved with error \(error)")
                 maybe(.completed)
             }
+            
             return Disposables.create()
 		}
         .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
@@ -51,12 +56,14 @@ open class RxCacheManager {
 	}
 	
 	fileprivate func setCache<T>(_ data: T, with key: String) where T: Codable {
-		print("[CACHE] saving \(key)")
+        log.printLog(type: self.externalStorageType.type, message: "CacheWrapper with the key \(key) saved")
 
 		let cacheData = CacheWrapper<T>(date: Date(), data: data)
-        if !externalStorageType.storage.put(data: cacheData, forKey: key) {
-			print("[CACHE] error saving cache with \(key)")
-		}
+        do {
+            try externalStorageType.storage.put(data: cacheData, forKey: key)
+        } catch {
+            self.log.printLog(type: self.externalStorageType.type, message: "[ERROR] CacheWrapper for \(key) not saved with error \(error)")
+        }
 	}
 	
     // MARK: - Public
@@ -83,18 +90,32 @@ open class RxCacheManager {
     /// - Parameter key: The key pattern to retrieve data
     /// - Returns: if true the data with key exist
     public func exist(forKey key: String) -> Bool {
-        return externalStorageType.storage.exist(forKey: key)
+        do {
+            return try externalStorageType.storage.exist(forKey: key)
+        } catch {
+            self.log.printLog(type: self.externalStorageType.type, message: "[ERROR] cannot retrieve information with \(key) with error \(error)")
+            return false
+        }
     }
     
     /// Delete an entry define by the key pattern
     ///
     /// - Parameter key: The key pattern to delete data
     public func delete(forKey key: String) {
-        externalStorageType.storage.delete(forKey: key)
+        do {
+            try externalStorageType.storage.delete(forKey: key)
+            self.log.printLog(type: self.externalStorageType.type, message: "CacheWrapper with the key \(key) deleted")
+        } catch {
+            self.log.printLog(type: self.externalStorageType.type, message: "[ERROR] CacheWrapper for \(key) not deleted with error \(error)")
+        }
     }
     
     /// Clear all data stored
     public func clear() {
-        externalStorageType.storage.clear()
+        do {
+            try externalStorageType.storage.clear()
+        } catch {
+            self.log.printLog(type: self.externalStorageType.type, message: "[ERROR] CacheWrapper database not cleared with error \(error)")
+        }
     }
 }
