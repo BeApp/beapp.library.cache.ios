@@ -10,7 +10,7 @@ There are currently one storage implementation :
 To install it, simply add the following line to your Podfile:
 
 ```
-pod 'BeappCache'
+pod 'BeappCache', :git => 'git@bitbucket.org:beappers/beapp.cache.ios.git', :tag => 'x.x.x'
 ```
 
 ## Usage
