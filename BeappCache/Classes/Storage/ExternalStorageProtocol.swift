@@ -1,29 +1,17 @@
 //
-//  ExternalStorage.swift
+//  ExternalStorageProtocol.swift
 //  BeappCache
 //
-//  Created by Antoine Richeux on 04/02/2019.
+//  Created by Cedric G on 06/02/2019.
 //
 
 import Foundation
-import RxSwift
 
-protocol ExternalStorageProtocol {
+public protocol ExternalStorageProtocol {
     func count() -> Int
     func exist(forKey key: String) -> Bool
     func get<T>(forKey key: String, of type: T.Type) -> CacheWrapper<T>? where T: Codable
     func put<T>(data: CacheWrapper<T>, forKey key: String) -> Bool where T: Codable
     func delete(forKey key: String)
     func clear()
-}
-
-public enum ExternalStorageEnum {
-    case Cache
-    
-    var storage: ExternalStorageProtocol {
-        switch self {
-        case .Cache:
-            return CacheStorage()
-        }
-    }
 }

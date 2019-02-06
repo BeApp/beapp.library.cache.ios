@@ -24,10 +24,9 @@ TODO: Add long description of the pod here.
   s.homepage         = 'https://github.com/aricheux/BeappCache'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'aricheux' => 'a.richeux@beapp.fr' }
+  s.author           = { 'beapp' => 'dev@beapp.fr' }
   s.source           = { :git => 'https://github.com/aricheux/BeappCache.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
+  
   s.ios.deployment_target = '11.0'
 
   s.source_files  = 'BeappCache/Classes/**/*'

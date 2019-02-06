@@ -8,24 +8,35 @@
 import Foundation
 import Cache
 
-class CacheStorage: ExternalStorageProtocol {
-    static let shared = CacheStorage()
+class CacheStorage {
     
-    var storage: Storage<DummyCodable>?
+    private var storage: Storage<DummyCodable>?
     
-    init() {
-        let diskConfig = DiskConfig(name: "Floppy")
-        let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)
+    private var config: CacheStorageConfig!
+    
+    private init() { }
+    
+    convenience init(_ cacheConfig: CacheStorageConfig) {
+        self.init()
+        config = cacheConfig
+        initStorage()
+    }
+    
+    private func initStorage() {
         do {
             storage = try Storage(
-                diskConfig: diskConfig,
-                memoryConfig: memoryConfig,
+                diskConfig: config.diskConfig,
+                memoryConfig: config.memoryConfig,
                 transformer: TransformerFactory.forCodable(ofType: DummyCodable.self)
             )
         } catch {
-            print("[ERROR] cannot with init of CacheStorage")
+            print("[BeappCache][ERROR] cannot with init of CacheStorage")
         }
     }
+}
+
+// MARK: - ExternalStorageProtocol
+extension CacheStorage: ExternalStorageProtocol {
     
     func count() -> Int {
         return 0

@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     
     // MARK: - Variables
     let bag = DisposeBag()
-    let rxCacheManager = RxCacheManager(storageType: .Cache)
+    let rxCacheManager = RxCacheManager()
     let singleString = Single.just("Test to save data with Cache library")
     
     // MARK: - Life cycle
