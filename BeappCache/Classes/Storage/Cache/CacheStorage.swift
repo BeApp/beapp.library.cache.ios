@@ -30,7 +30,7 @@ class CacheStorage {
                 transformer: TransformerFactory.forCodable(ofType: DummyCodable.self)
             )
         } catch {
-            print("[BeappCache][ERROR] cannot with init of CacheStorage")
+            print("[BeappCache] [ERROR] cannot with init of CacheStorage")
         }
     }
 }
@@ -51,12 +51,7 @@ extension CacheStorage: ExternalStorageProtocol {
             return nil
         }
         
-        do {
-            return try _storage.transformCodable(ofType: CacheWrapper<T>.self).object(forKey: key)
-        } catch {
-            print("[BeappCache][ERROR] cannot get storage from Cache")
-            return nil
-        }
+        return try _storage.transformCodable(ofType: CacheWrapper<T>.self).object(forKey: key)
     }
     
     func put<T>(data: CacheWrapper<T>, forKey key: String) throws where T : Decodable, T : Encodable {
@@ -64,18 +59,10 @@ extension CacheStorage: ExternalStorageProtocol {
     }
     
     func delete(forKey key: String) throws {
-        do {
-            try storage?.removeObject(forKey: key)
-        } catch {
-            print("[ERROR] cannot delete cache for key \(key) with \(error)")
-        }
+        try storage?.removeObject(forKey: key)
     }
     
     func clear() throws {
-        do {
-            try storage?.removeAll()
-        } catch {
-            print("[ERROR] cannot clear cache with \(error)")
-        }
+        try storage?.removeAll()
     }
 }
