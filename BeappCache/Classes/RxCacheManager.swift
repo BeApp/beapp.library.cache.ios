@@ -67,7 +67,33 @@ open class RxCacheManager {
 	public func fromKey<T: Codable>(key: String) -> StrategyBuilder<T> {
 		return StrategyBuilder<T>(key: key, cacheManager: self)
 	}
-
+    
+    /// Ask to know the current data count
+    ///
+    /// - Returns: count of data stored
+    public func count() -> Int {
+        return externalStorageType.storage.count()
+    }
+    
+    /// Ask to know if a data with specific key exist
+    ///
+    /// - Parameter key: The key pattern to retrieve data
+    /// - Returns: if true the data with key exist
+    public func exist(forKey key: String) -> Bool {
+        return externalStorageType.storage.exist(forKey: key)
+    }
+    
+    /// Delete an entry define by the key pattern
+    ///
+    /// - Parameter key: The key pattern to delete data
+    public func delete(forKey key: String) {
+        externalStorageType.storage.delete(forKey: key)
+    }
+    
+    /// Clear all data stored
+    public func clear() {
+        externalStorageType.storage.clear()
+    }
 }
 
 open class StrategyBuilder<T: Codable> {

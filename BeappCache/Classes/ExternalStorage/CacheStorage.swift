@@ -62,13 +62,11 @@ class CacheStorage: ExternalStorageProtocol {
         }
     }
     
-    func delete(forKey key: String) -> Bool {
+    func delete(forKey key: String) {
         do {
             try storage?.removeObject(forKey: key)
-            return true
         } catch {
             print("[ERROR] cannot delete cache for key \(key) with \(error)")
-            return false
         }
     }
     
