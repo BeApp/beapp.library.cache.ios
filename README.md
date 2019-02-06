@@ -31,8 +31,12 @@ rxCacheManager.fromKey(key: "key_xxx")
 
 ## RxCacheManager configuration
 
+### Verbose
+* `RxCacheManager(verbose: true)`
+1. Enable verbose log of RxCacheManager
+
 ### Default configuration
-* `RxCacheManager()`: 
+* `RxCacheManager()`
 1. Use  the Cache librairy
 2. Cache configuration is by default `DiskConfig(name: "Floppy")` and `MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)`
 
