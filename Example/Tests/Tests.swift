@@ -48,7 +48,7 @@ class Tests: XCTestCase {
     }
     
     private func setDataInCache(forKey key: String, strategy: CacheStrategy) {
-        let expectation = XCTestExpectation(description: "Download apple.com home page")
+        let expectation = XCTestExpectation(description: "Download data from cache with key \(key)")
         
         cacheManager.fromKey(key: key)
             .withAsync(Single.just("Data for key \(key) is saved"))
