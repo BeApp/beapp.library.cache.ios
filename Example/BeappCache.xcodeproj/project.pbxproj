@@ -13,7 +13,8 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		607FACEC1AFB9204008FA782 /* Tests_default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests_default.swift */; };
+		9481377C220DEB170053D6A9 /* Tests_Cache_Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481377B220DEB170053D6A9 /* Tests_Cache_Custom.swift */; };
 		CB9A86AC023BC65B977F1F1C /* Pods_BeappCache_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C167F4D2B16A64A0B446D9 /* Pods_BeappCache_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,10 +40,11 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* BeappCache_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeappCache_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		607FACEB1AFB9204008FA782 /* Tests_default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_default.swift; sourceTree = "<group>"; };
 		7C24A7850F9F2DEDE701B1EB /* Pods-BeappCache_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeappCache_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeappCache_Example/Pods-BeappCache_Example.release.xcconfig"; sourceTree = "<group>"; };
 		83C167F4D2B16A64A0B446D9 /* Pods_BeappCache_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeappCache_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90C51CC3F69FE7C4D0938E41 /* BeappCache.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BeappCache.podspec; path = ../BeappCache.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9481377B220DEB170053D6A9 /* Tests_Cache_Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_Cache_Custom.swift; sourceTree = "<group>"; };
 		9B843FF333183824CA63B0E7 /* Pods_BeappCache_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeappCache_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1BF2510CB15D7AE6448C2F3 /* Pods-BeappCache_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeappCache_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeappCache_Tests/Pods-BeappCache_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		C2A6A1B79A8CCEBB28919390 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -113,7 +115,8 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				607FACEB1AFB9204008FA782 /* Tests_default.swift */,
+				9481377B220DEB170053D6A9 /* Tests_Cache_Custom.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -365,7 +368,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				607FACEC1AFB9204008FA782 /* Tests_default.swift in Sources */,
+				9481377C220DEB170053D6A9 /* Tests_Cache_Custom.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
