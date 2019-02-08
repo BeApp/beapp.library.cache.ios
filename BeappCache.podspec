@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://bitbucket.org/beappers/beapp.cache.ios'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'beapp' => 'dev@beapp.fr' }
-  s.source           = { :git => 'https://aricheux@bitbucket.org/beappers/beapp.cache.ios.git', :tag => s.version.to_s }
+  s.source           = { :git => 'git@bitbucket.org:beappers/beapp.cache.ios.git', :tag => s.version.to_s }
   
   s.ios.deployment_target = '11.0'
   s.swift_version = '4.2'
