@@ -14,7 +14,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests_default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests_default.swift */; };
-		94190D0B221AB7370036B884 /* XCCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94190D08221AB4C20036B884 /* XCCache.swift */; };
+		9408661E221AC018006E85B9 /* XCCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94190D08221AB4C20036B884 /* XCCache.swift */; };
 		9481377C220DEB170053D6A9 /* Tests_Cache_Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481377B220DEB170053D6A9 /* Tests_Cache_Custom.swift */; };
 		CB9A86AC023BC65B977F1F1C /* Pods_BeappCache_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C167F4D2B16A64A0B446D9 /* Pods_BeappCache_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -117,10 +117,10 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				94190D08221AB4C20036B884 /* XCCache.swift */,
 				607FACEB1AFB9204008FA782 /* Tests_default.swift */,
 				9481377B220DEB170053D6A9 /* Tests_Cache_Custom.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
-				94190D08221AB4C20036B884 /* XCCache.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -362,7 +362,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94190D0B221AB7370036B884 /* XCCache.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
@@ -372,6 +371,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9408661E221AC018006E85B9 /* XCCache.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* Tests_default.swift in Sources */,
 				9481377C220DEB170053D6A9 /* Tests_Cache_Custom.swift in Sources */,
 			);

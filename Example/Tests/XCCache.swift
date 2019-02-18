@@ -32,7 +32,7 @@ class XCCache {
         cacheManager.clear()
     }
     
-    func setDataInCache(forKey key: String, strategy: CacheStrategy, callBack: @escaping(Bool) -> ()) {
+    func setDataInCache(forKey key: String, strategy: CacheStrategy, callBack: @escaping() -> ()) {
         cacheManager.fromKey(key: key)
             .withAsync(Single.just("Data for key \(key) is saved"))
             .withStrategy(strategy)
@@ -42,9 +42,9 @@ class XCCache {
                 print("Data is created for key \(key)")
             }, onError: { (error) in
                 print("[ERROR] Cannot add the key with error \(error)")
-                callBack(false)
+                callBack()
             }, onCompleted: {
-                callBack(true)
+                callBack()
             })
             .disposed(by: bag)        
     }

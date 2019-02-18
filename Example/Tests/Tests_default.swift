@@ -13,36 +13,20 @@ class Tests_default: XCTestCase {
     }
     
     func testCreateKeyInCache() {
-        xcCache.setDataInCache(forKey: "key_1", strategy: .justAsync) { (status) in
-            if status {
-                XCTAssertTrue(self.xcCache.exist(forKey: "key_1"))
-            } else {
-                XCTAssert(false)
-            }
+        xcCache.setDataInCache(forKey: "key_1", strategy: .justAsync) {
+            XCTAssertTrue(self.xcCache.exist(forKey: "key_1"))
         }
         
-        xcCache.setDataInCache(forKey: "key_2", strategy: .asyncOrCache) { (status) in
-            if status {
-                XCTAssertTrue(self.xcCache.exist(forKey: "key_2"))
-            } else {
-                XCTAssert(false)
-            }
+        xcCache.setDataInCache(forKey: "key_2", strategy: .asyncOrCache) {
+            XCTAssertTrue(self.xcCache.exist(forKey: "key_2"))
         }
         
-        xcCache.setDataInCache(forKey: "key_3", strategy: .cacheThenAsync) { (status) in
-            if status {
-                XCTAssertTrue(self.xcCache.exist(forKey: "key_3"))
-            } else {
-                XCTAssert(false)
-            }
+        xcCache.setDataInCache(forKey: "key_3", strategy: .cacheThenAsync) {
+            XCTAssertTrue(self.xcCache.exist(forKey: "key_3"))
         }
         
-        xcCache.setDataInCache(forKey: "key_4", strategy: .cacheOrAsync) { (status) in
-            if status {
-                XCTAssertTrue(self.xcCache.exist(forKey: "key_4"))
-            } else {
-                XCTAssert(false)
-            }
+        xcCache.setDataInCache(forKey: "key_4", strategy: .cacheOrAsync) {
+            XCTAssertTrue(self.xcCache.exist(forKey: "key_4"))
         }
     }
 
