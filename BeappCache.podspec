@@ -21,10 +21,10 @@ Pod::Spec.new do |s|
   This library provides a cache mechanism relying on RxSwift. There are currently one storage implementation: Cache
   DESC
 
-  s.homepage         = 'https://bitbucket.org/beappers/beapp.cache.ios'
+  s.homepage         = 'https://github.com/BeApp/beapp.library.cache.ios.git'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'beapp' => 'dev@beapp.fr' }
-  s.source           = { :git => 'git@bitbucket.org:beappers/beapp.cache.ios.git', :tag => s.version.to_s }
+  s.source           = { :git => 'git@github.com:BeApp/beapp.library.cache.ios.git', :tag => s.version.to_s }
   
   s.ios.deployment_target = '11.0'
   s.swift_version = '4.2'
