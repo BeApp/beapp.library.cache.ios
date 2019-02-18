@@ -12,7 +12,6 @@ public class StrategyBuilder<T: Codable> {
     private let key: String
     private let cacheManager: RxCacheManager
     private var cacheStrategy: CacheStrategy
-    
     private var asyncObservable: Single<T>
     
     init(key: String, cacheManager: RxCacheManager) {

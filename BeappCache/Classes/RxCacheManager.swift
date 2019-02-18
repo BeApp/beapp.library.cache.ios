@@ -11,14 +11,6 @@ import RxSwift
 
 public struct DummyCodable: Codable { }
 
-/**
-[RxCache Beapp Android]: (https://bitbucket.org/beappers/beapp.cache.andro)
-
-This class is the entry point of the Cache management
-
-- References: [RxCache Beapp Android]
-*/  
-
 open class RxCacheManager {
 	var externalStorageType: ExternalStorageEnum
     var log: Log!
@@ -28,7 +20,7 @@ open class RxCacheManager {
         log = Log(verbose: verbose)
     }
 	
-    // MARK: -
+    // MARK: - Internal functions
     
     func buildCacheObservable<T>(key: String, of type: T.Type) -> Maybe<CacheWrapper<T>> where T: Codable {
 		return Maybe<CacheWrapper<T>>.create { maybe in
@@ -55,7 +47,12 @@ open class RxCacheManager {
 			.map { CacheWrapper<T>(date: Date(), data: $0) }
 	}
 	
-	fileprivate func setCache<T>(_ data: T, with key: String) where T: Codable {
+    /// Set data in cache file with key
+    ///
+    /// - Parameters:
+    ///   - data: Codable data to stored
+    ///   - key: id to save data in cache file
+    func setCache<T>(_ data: T, with key: String) where T: Codable {
         log.printLog(type: self.externalStorageType.type, message: "CacheWrapper with the key \(key) saved")
 
 		let cacheData = CacheWrapper<T>(date: Date(), data: data)
