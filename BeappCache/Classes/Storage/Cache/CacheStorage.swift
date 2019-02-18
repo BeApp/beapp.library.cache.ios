@@ -43,13 +43,13 @@ extension CacheStorage: ExternalStorageProtocol {
     }
     
     func exist(forKey key: String) throws -> Bool {
-        return try storage?.existsObject(forKey: key) ?? false
+        guard let _storage = storage else { return false }
+        
+        return try _storage.existsObject(forKey: key)
     }
     
     func get<T>(forKey key: String, of type: T.Type) throws -> CacheWrapper<T>? where T : Decodable, T : Encodable {
-        guard let _storage = storage else {
-            return nil
-        }
+        guard let _storage = storage else { return nil }
         
         return try _storage.transformCodable(ofType: CacheWrapper<T>.self).object(forKey: key)
     }
