@@ -38,7 +38,7 @@ class Tests_default: XCTestCase {
             expectArray[3].fulfill()
         }
         
-        wait(for: [expectArray[0], expectArray[1], expectArray[2], expectArray[3]], timeout: 5.0)
+        wait(for: [expectArray[0], expectArray[1], expectArray[2], expectArray[3]], timeout: 10.0)
         
         getKeyValueFromCache()
     }
@@ -70,7 +70,7 @@ class Tests_default: XCTestCase {
             expectArray[3].fulfill()
         }
         
-        wait(for: [expectArray[0], expectArray[1], expectArray[2], expectArray[3]], timeout: 5.0)
+        wait(for: [expectArray[0], expectArray[1], expectArray[2], expectArray[3]], timeout: 10.0)
         
         deleteKey()
     }
