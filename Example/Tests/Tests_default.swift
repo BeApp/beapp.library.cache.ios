@@ -9,19 +9,21 @@ class Tests_default: XCTestCase {
     
     override func setUp() {
         super.setUp()
-
+        
         bag = DisposeBag()
-        cacheManager = RxCacheManager()
+        cacheManager = RxCacheManager(verbose: true)
         clearDatabase()
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        
+        bag = nil
+        cacheManager = nil
     }
     
     func testCreateKeyInCache() {
-        guard let _cacheManager = cacheManager else { XCTAssert(false) }
+        guard let _cacheManager = cacheManager else { return }
         
         setDataInCache(forKey: "key_1", strategy: .justAsync)
         XCTAssertTrue(_cacheManager.exist(forKey: "key_1"))
@@ -93,13 +95,5 @@ class Tests_default: XCTestCase {
                 XCTAssert(false)
             })
             .disposed(by: _bag)
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure() {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
+    }    
 }
