@@ -72,4 +72,4 @@ Beapp, contact@beapp.fr
 
 ## License
 
-BeappLogger is available under the MIT license. See the LICENSE file for more info.
+BeappCache is available under the MIT license. See the LICENSE file for more info.
