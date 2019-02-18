@@ -18,41 +18,75 @@ class Tests_Cache_Custom: XCTestCase {
         super.setUp()
         
         let diskConfig = DiskConfig(name: "BeappCache")
-        let memoryConfig = MemoryConfig(expiry: .date(Date().addingTimeInterval(3600 * 24)), countLimit: 20, totalCostLimit: 20)
+        let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)
         let cacheConfig = CacheStorageConfig(diskConfig: diskConfig, memoryConfig: memoryConfig)
         xcCache = XCCache(cacheManager: RxCacheManager(storageType: .cache(config: cacheConfig), verbose: true))
     }
     
     func testCreateKeyInCache() {
+        var expectArray = [XCTestExpectation]()
+        for i in 1...4 {
+            expectArray.append(XCTestExpectation(description: "save key_\(i)"))
+        }
+        
         xcCache.setDataInCache(forKey: "key_1", strategy: .justAsync) {
-            XCTAssertTrue(self.xcCache.exist(forKey: "key_1"))
+            XCTAssert(self.xcCache.exist(forKey: "key_1"))
+            expectArray[0].fulfill()
         }
         
         xcCache.setDataInCache(forKey: "key_2", strategy: .asyncOrCache) {
-            XCTAssertTrue(self.xcCache.exist(forKey: "key_2"))
+            XCTAssert(self.xcCache.exist(forKey: "key_2"))
+            expectArray[1].fulfill()
         }
         
         xcCache.setDataInCache(forKey: "key_3", strategy: .cacheThenAsync) {
-            XCTAssertTrue(self.xcCache.exist(forKey: "key_3"))
+            XCTAssert(self.xcCache.exist(forKey: "key_3"))
+            expectArray[2].fulfill()
         }
+        
+        xcCache.setDataInCache(forKey: "key_4", strategy: .cacheOrAsync) {
+            XCTAssert(self.xcCache.exist(forKey: "key_4"))
+            expectArray[3].fulfill()
+        }
+        
+        wait(for: [expectArray[0], expectArray[1], expectArray[2], expectArray[3]], timeout: 5.0)
+        
+        getKeyValueFromCache()
     }
     
-    func testGetKeyValueFromCache() {
+    func getKeyValueFromCache() {
+        var expectArray = [XCTestExpectation]()
+        for i in 1...4 {
+            expectArray.append(XCTestExpectation(description: "get key_\(i)"))
+        }
+        
         xcCache.getDataFromCache(forKey: "key_1") { (keyValue) in
-            XCTAssert(keyValue == "Data for key key_1 is saved")
+            print(keyValue)
+            XCTAssertTrue(keyValue == "Data for key key_1 is saved")
+            expectArray[0].fulfill()
         }
         xcCache.getDataFromCache(forKey: "key_2") { (keyValue) in
-            XCTAssert(keyValue == "Data for key key_2 is saved")
+            print(keyValue)
+            XCTAssertTrue(keyValue == "Data for key key_2 is saved")
+            expectArray[1].fulfill()
         }
         xcCache.getDataFromCache(forKey: "key_3") { (keyValue) in
-            XCTAssert(keyValue == "Data for key key_3 is saved")
+            print(keyValue)
+            XCTAssertTrue(keyValue == "Data for key key_3 is saved")
+            expectArray[2].fulfill()
         }
         xcCache.getDataFromCache(forKey: "key_4") { (keyValue) in
-            XCTAssert(keyValue == "Data for key key_4 is saved")
+            print(keyValue)
+            XCTAssertTrue(keyValue == "Data for key key_4 is saved")
+            expectArray[3].fulfill()
         }
+        
+        wait(for: [expectArray[0], expectArray[1], expectArray[2], expectArray[3]], timeout: 5.0)
+        
+        deleteKey()
     }
     
-    func testDeleteKey() {
+    func deleteKey() {
         xcCache.delete(forKey: "key_1")
         XCTAssertFalse(xcCache.exist(forKey: "key_1"))
         xcCache.clear()
