@@ -27,9 +27,9 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/BeApp/beapp.library.cache.ios.git', :tag => s.version.to_s }
   
   s.ios.deployment_target = '11.0'
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
   s.source_files  = 'BeappCache/Classes/**/*'
   s.frameworks = 'Foundation'
   s.dependency 'Cache', '~> 5.2.0'
-  s.dependency 'RxSwift', '~> 4.4.0'
+  s.dependency 'RxSwift', '~> 5.0.0'
 end
