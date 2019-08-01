@@ -31,5 +31,6 @@ Pod::Spec.new do |s|
   s.source_files  = 'BeappCache/Classes/**/*'
   s.frameworks = 'Foundation'
   s.dependency 'Cache', '~> 5.2.0'
+  s.dependency 'RxSwift', '~> 4.5' #for cache library
   s.dependency 'RxSwift', '~> 5.0.1'
 end
