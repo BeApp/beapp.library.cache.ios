@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BeappCache'
-  s.version          = '0.4.0'
+  s.version          = '0.5'
   s.summary          = 'This library provides a cache mechanism relying on RxSwift'
 
 # This description is used to generate tags and improve search results.
