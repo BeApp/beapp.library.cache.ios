@@ -54,8 +54,13 @@ extension CacheStorage: ExternalStorageProtocol {
         return try _storage.transformCodable(ofType: CacheWrapper<T>.self).object(forKey: key)
     }
     
-    func put<T>(data: CacheWrapper<T>, forKey key: String) throws where T : Decodable, T : Encodable {
-        try storage?.transformCodable(ofType: CacheWrapper.self).setObject(data, forKey: key)
+    func put<T>(data: CacheWrapper<T>, forKey key: String, customExpirySecond: TimeInterval?) throws where T : Decodable, T : Encodable {
+        var expiry: Expiry? = nil
+        if let expSecond = customExpirySecond {
+            expiry = .seconds(expSecond)
+        }
+        
+        try storage?.transformCodable(ofType: CacheWrapper.self).setObject(data, forKey: key, expiry: expiry)
     }
     
     func delete(forKey key: String) throws {

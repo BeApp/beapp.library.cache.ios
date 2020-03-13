@@ -10,12 +10,14 @@ import RxSwift
 
 public class StrategyBuilder<T: Codable> {
     private let key: String
+    private let customExpirySecond: TimeInterval?
     private let cacheManager: RxCacheManager
     private var cacheStrategy: CacheStrategy
     private var asyncObservable: Single<T>
     
-    init(key: String, cacheManager: RxCacheManager) {
+    init(key: String, cacheManager: RxCacheManager, customExpirySecond: TimeInterval?) {
         self.key = key
+        self.customExpirySecond = customExpirySecond
         self.cacheManager = cacheManager
         self.cacheStrategy = .cacheThenAsync
         self.asyncObservable = Single.never()
@@ -54,7 +56,7 @@ public class StrategyBuilder<T: Codable> {
      */
     func fetchWrapper() -> Observable<CacheWrapper<T>> {
         
-        let asyncObservableCaching = cacheManager.buildAsyncObservableCaching(asyncObservable: self.asyncObservable, key: self.key)
+        let asyncObservableCaching = cacheManager.buildAsyncObservableCaching(asyncObservable: self.asyncObservable, key: self.key, customExpirySecond: customExpirySecond)
         let cacheObservable = cacheManager.buildCacheObservable(key: self.key, of: T.self)
         
         return cacheStrategy.strategy.getStrategyObservable(cacheObservable: cacheObservable, asyncObservable: asyncObservableCaching)

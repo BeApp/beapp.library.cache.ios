@@ -39,10 +39,10 @@ open class RxCacheManager {
         .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
 	}
 	
-    func buildAsyncObservableCaching<T>(asyncObservable: Single<T>, key: String) -> Single<CacheWrapper<T>> where T: Codable {
+    func buildAsyncObservableCaching<T>(asyncObservable: Single<T>, key: String, customExpirySecond: TimeInterval?) -> Single<CacheWrapper<T>> where T: Codable {
 		return asyncObservable
 			.do(onSuccess: { (decodable) in
-				self.setCache(decodable, with: key)
+                self.setCache(decodable, with: key, customExpirySecond)
 			})
 			.map { CacheWrapper<T>(date: Date(), data: $0) }
 	}
@@ -52,12 +52,12 @@ open class RxCacheManager {
     /// - Parameters:
     ///   - data: Codable data to stored
     ///   - key: id to save data in cache file
-    func setCache<T>(_ data: T, with key: String) where T: Codable {
+    func setCache<T>(_ data: T, with key: String, _ customExpirySecond: TimeInterval?) where T: Codable {
         log.printLog(type: self.externalStorageType.type, message: "CacheWrapper with the key \(key) saved")
 
 		let cacheData = CacheWrapper<T>(date: Date(), data: data)
         do {
-            try externalStorageType.storage.put(data: cacheData, forKey: key)
+            try externalStorageType.storage.put(data: cacheData, forKey: key, customExpirySecond: customExpirySecond)
         } catch {
             self.log.printLog(type: self.externalStorageType.type, message: "[ERROR] CacheWrapper for \(key) not saved with error \(error)")
         }
@@ -71,8 +71,8 @@ open class RxCacheManager {
 	- parameter key:  The key pattern to retrieve data
 	- returns: A builder to prepare cache resolution
 	*/
-	public func fromKey<T: Codable>(key: String) -> StrategyBuilder<T> {
-		return StrategyBuilder<T>(key: key, cacheManager: self)
+    public func fromKey<T: Codable>(key: String, withCustomExpiration expSecond: TimeInterval? = nil) -> StrategyBuilder<T> {
+		return StrategyBuilder<T>(key: key, cacheManager: self, customExpirySecond: expSecond)
 	}
     
     /// Ask to know the current data count
