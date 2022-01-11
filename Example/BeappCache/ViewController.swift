@@ -34,7 +34,7 @@ class ViewController: UIViewController {
             .withAsync(singleString)
             .withStrategy(.asyncOrCache)
             .fetch()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (_) in
                 print("Success async request or data from cache")
             }, onError: { (error) in
@@ -49,7 +49,7 @@ class ViewController: UIViewController {
             .withAsync(singleString)
             .withStrategy(.justAsync)
             .fetch()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (_) in
                 print("Success async request")
             }, onError: { (error) in
@@ -64,7 +64,7 @@ class ViewController: UIViewController {
             .withAsync(singleString)
             .withStrategy(.justCache)
             .fetch()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (_) in
                 print("Success to get data from cache")
             }, onError: { (error) in
