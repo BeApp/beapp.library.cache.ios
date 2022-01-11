@@ -37,7 +37,7 @@ class XCCache {
             .withAsync(Single.just("Data for key \(key) is saved"))
             .withStrategy(strategy)
             .fetch()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (result) in
                 print("Data is created for key \(key)")
             }, onError: { (error) in
@@ -54,7 +54,7 @@ class XCCache {
             .withAsync(Single.just(String()))
             .withStrategy(.justCache)
             .fetch()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (keyValue) in
                 callBack(keyValue)
             }, onError: { (error) in
