@@ -13,7 +13,7 @@ class AsyncOrCacheStrategy: CacheStrategyProtocol {
 	func getStrategyObservable<T>(cacheObservable: Maybe<CacheWrapper<T>>, asyncObservable: Single<CacheWrapper<T>>) -> Observable<CacheWrapper<T>> where T: Codable {
 		return asyncObservable
 			.asObservable()
-			.catchError({ (error) in
+            .catch({ (error) in
 				print("[ERROR] \(error)")
 				return cacheObservable.asObservable().ifEmpty(switchTo: Observable.error(error))
 			})

@@ -36,7 +36,7 @@ open class RxCacheManager {
             
             return Disposables.create()
 		}
-        .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+        .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
 	}
 	
     func buildAsyncObservableCaching<T>(asyncObservable: Single<T>, key: String, customExpirySecond: TimeInterval?) -> Single<CacheWrapper<T>> where T: Codable {
